@@ -1,16 +1,20 @@
 import React from "react";
 import {View , Text , StyleSheet, TouchableOpacity} from 'react-native'
 
-const Task = (props) => {
+const Task = ({
+    text,
+    completeTask,
+    index,
+}) => {
     return(
         <View style={styles.item}>
             <View style={styles.itemLeft}>
                 <View style={styles.square}></View>
-                 <Text style={styles.itemText}>{props.text}</Text>
+                 <Text style={styles.itemText}>{text}</Text>
             </View>
-            <View style={styles.circular}>
+            <TouchableOpacity style={styles.circular} onPress={() => completeTask(index)}>
 
-            </View>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -43,8 +47,8 @@ const styles = StyleSheet.create({
         maxWidth: "80%",
     },
     circular: {
-        width: 12,
-        height: 12,
+        width: 16,
+        height: 16,
         borderColor:"#55BCF6",
         borderWidth: 2,
         borderRadius: 5,

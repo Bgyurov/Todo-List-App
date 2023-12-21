@@ -2,11 +2,13 @@ import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, 
 } from 'react-native';
 import React from 'react';
 import Task from './components/Task/Task.js';
+
 export default function App() {
 
   const [task, setTask] = React.useState()
   const [taskItems, setTaskItems] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true);
+
   const handleAddTask = () => {
     Keyboard.dismiss()
     setTaskItems([...taskItems,task])
@@ -17,6 +19,7 @@ export default function App() {
     itemsCopy.splice(index,1)
     setTaskItems(itemsCopy)
   }
+
 
   React.useEffect(() => {
     const loadData = async () => {
@@ -30,6 +33,7 @@ export default function App() {
   }, []);
   return (
     <View style={styles.container}>
+
       {isLoading ? (
         <View style={styles.spinner}>
           <Text style={styles.loadingTitle}>Оrganize your day </Text>
@@ -40,9 +44,9 @@ export default function App() {
           <Text style={styles.sectionTitle}>Today`s tasks</Text>
           <View style={styles.items}>
             {taskItems.map((name, index) => (
-              <TouchableOpacity key={index} onPress={() => completeTask(index)}>
-                <Task text={name} />
-              </TouchableOpacity>
+              
+                <Task key={index} text={name} completeTask={completeTask} index={index} />
+              
             ))}
           </View>
         </View>
